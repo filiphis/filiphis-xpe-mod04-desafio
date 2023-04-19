@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ["api.coingecko.com", "assets.coingecko.com"],
+  },
 };
 
 module.exports = nextConfig;
