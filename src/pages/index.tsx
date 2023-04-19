@@ -4,11 +4,19 @@ import { Input } from "@/components/Input";
 import { Wrapper } from "@/styles/home";
 import Head from "next/head";
 import Image from "next/image";
+import axios from "axios";
+import { CoinProps } from "@/components/Coin";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 // import { Inter } from "next/font/google";
 
 // const inter = Inter({ subsets: ["latin"] });
 
-const coinList = [
+type CoinsListProps = {
+  coins: CoinProps[];
+};
+
+export const coinList = [
   {
     id: "binance",
     name: "Binance",
@@ -41,7 +49,29 @@ const coinList = [
   },
 ];
 
-export default function Home() {
+async function getCoins(page: string = "1") {
+  const res = await axios.get(
+    `https://api.coingecko.com/api/v3/exchanges/?per_page=100&page=${page}`
+  );
+  const coins = res.data;
+
+  return coins;
+}
+
+export async function getStaticProps() {
+  const coins = await getCoins();
+
+  return { props: { coins } };
+}
+
+export default function Home({ coins: initialCoins }: CoinsListProps) {
+  const [page, setPage] = useState("1");
+  const { data: coins } = useQuery({
+    queryKey: ["coins", page],
+    queryFn: () => getCoins(page),
+    initialData: initialCoins,
+    staleTime: 1000 * 60,
+  });
   return (
     <>
       <Head>
@@ -53,10 +83,10 @@ export default function Home() {
       <main>
         <Wrapper>
           <Button disabled={true}>Página Anterior</Button>
-          <Button>Próxima Página</Button>
+          <Button onClick={() => "nextpage"}>Próxima Página</Button>
         </Wrapper>
         <Input placeholder="Filtre por nome" />
-        <CoinList coinList={coinList} />
+        <CoinList coinList={coins} />
       </main>
     </>
   );

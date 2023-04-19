@@ -13,8 +13,6 @@ export const Wrapper = styled.button<WrapperProps>`
     border: 1px solid black;
     border-radius: 4px;
 
-    /* color: ${!!disabled && "red"}; */
-
     &:disabled {
       cursor: not-allowed;
       border-color: silver;
