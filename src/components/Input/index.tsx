@@ -1,6 +1,7 @@
+import { InputHTMLAttributes } from "react";
 import * as S from "./styles";
 
-export type InputProps = {
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   type?: string;
   placeholder?: string;
 };
@@ -8,8 +9,9 @@ export type InputProps = {
 export const Input = ({
   type = "text",
   placeholder = "Placeholder Text",
+  ...props
 }: InputProps) => (
   <S.Wrapper>
-    <S.Input type={type} placeholder={placeholder}></S.Input>
+    <S.Input {...props} type={type} placeholder={placeholder}></S.Input>
   </S.Wrapper>
 );

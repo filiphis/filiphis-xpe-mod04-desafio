@@ -6,3 +6,10 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const SpinnerWrapper = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 60px;
+  width: 100%;
+`;
