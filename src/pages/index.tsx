@@ -75,11 +75,13 @@ export default function Home() {
 
         {isLoading ? (
           <S.SpinnerWrapper>
-            <MoonLoader color="##c0c0c0" />
+            {/* <MoonLoader color="##c0c0c0" /> */}
+            Carregando...
           </S.SpinnerWrapper>
         ) : isFetching ? (
           <S.SpinnerWrapper>
-            <MoonLoader color="##c0c0c0" />
+            {/* <MoonLoader color="##c0c0c0" /> */}
+            Carregando...
           </S.SpinnerWrapper>
         ) : coins ? (
           <CoinList coinList={coins} filter={filter} />
