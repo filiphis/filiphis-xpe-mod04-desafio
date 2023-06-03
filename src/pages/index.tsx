@@ -1,45 +1,5 @@
 import { Button } from "@/components/Button";
-<<<<<<< HEAD
 
-import * as S from "@/styles/home";
-import Head from "next/head";
-import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import MoonLoader from "react-spinners/ClipLoader";
-import { getYearRanking } from "./api/times";
-import { TimeRanking } from "@/components/TimeRanking";
-
-export default function Home() {
-  const [year, setYear] = useState(2003);
-
-  function nextPage() {
-    if (year == 2015) {
-      return;
-    } else {
-      setYear(year + 1);
-    }
-  }
-
-  function previousPage() {
-    if (year == 2003) {
-      return;
-    } else {
-      setYear(year - 1);
-    }
-  }
-
-  const {
-    data: yearRanking,
-    isLoading,
-    isFetching,
-  } = useQuery({
-    queryKey: [`matches/${year}`, year],
-    queryFn: () => getYearRanking(year),
-    staleTime: 1000 * 60 * 60,
-  });
-
-=======
 import { CoinList } from "@/components/CoinList";
 import { Input } from "@/components/Input";
 import * as S from "@/styles/home";
@@ -49,7 +9,6 @@ import axios from "axios";
 import { CoinProps } from "@/components/Coin";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import MoonLoader from "react-spinners/ClipLoader";
 // import { Inter } from "next/font/google";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -91,7 +50,6 @@ export default function Home() {
     }
   }
 
->>>>>>> 17b5584 (Retornando para o commit correto)
   return (
     <>
       <Head>
@@ -102,44 +60,6 @@ export default function Home() {
       </Head>
       <main>
         <S.Wrapper>
-<<<<<<< HEAD
-          <Button onClick={previousPage} disabled={year === 2003}>
-            Página Anterior
-          </Button>
-          <select
-            value={year}
-            onChange={(e) => setYear(Number(e.target.value))}
-          >
-            <option value="2003">2003</option>
-            <option value="2004">2004</option>
-            <option value="2005">2005</option>
-            <option value="2006">2006</option>
-            <option value="2007">2007</option>
-            <option value="2008">2008</option>
-            <option value="2009">2009</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-          </select>
-          <Button onClick={nextPage} disabled={year === 2015}>
-            Próxima Página
-          </Button>
-        </S.Wrapper>
-
-        {isLoading ? (
-          <S.SpinnerWrapper>
-            <MoonLoader color="##c0c0c0" />
-          </S.SpinnerWrapper>
-        ) : isFetching ? (
-          <S.SpinnerWrapper>
-            <MoonLoader color="##c0c0c0" />
-          </S.SpinnerWrapper>
-        ) : yearRanking ? (
-          <TimeRanking teamList={yearRanking} />
-=======
           <Button onClick={previousPage} disabled={page === 1}>
             Página Anterior
           </Button>
@@ -165,14 +85,11 @@ export default function Home() {
           </S.SpinnerWrapper>
         ) : coins ? (
           <CoinList coinList={coins} filter={filter} />
->>>>>>> 17b5584 (Retornando para o commit correto)
         ) : null}
       </main>
     </>
   );
 }
-<<<<<<< HEAD
-=======
 
 export const coinList = [
   {
@@ -215,4 +132,3 @@ async function getCoins(page = 1) {
 
   return coins;
 }
->>>>>>> 17b5584 (Retornando para o commit correto)
